@@ -1,0 +1,46 @@
+package TestSuite1;
+import static org.junit.Assert.assertEquals;
+
+//import java.time.Duration;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+//import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class Feature1 {
+
+	
+		private WebDriver driver; 
+		
+		@Before 
+		public void setUp() {
+			System.setProperty("webdriver.chrome.driver","c:/chromedriver.exe");
+			driver = new ChromeDriver();
+			driver.manage().window().maximize();
+			driver.get("https://www.google.com/");	
+	
+		}
+		@Test
+		public void TestName() {
+			WebElement searchbox = driver.findElement(By.name("q"));
+			searchbox.clear();
+			searchbox.sendKeys("buscar");
+			searchbox.submit();
+			//WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
+			// add static import from junit
+			assertEquals("buscar",driver.getTitle());
+				
+		}
+		@After
+		public void tearDown() {
+			driver.quit();
+
+	}
+}
+
+
